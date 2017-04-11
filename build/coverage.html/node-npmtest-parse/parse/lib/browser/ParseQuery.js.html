@@ -1,0 +1,3878 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-parse/parse/lib/browser/ParseQuery.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-parse">npmtest-parse (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-parse/parse/lib/browser/ParseQuery.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">9.9% <small>(29 / 293)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">2.92% <small>(4 / 137)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">2.94% <small>(2 / 68)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">9.9% <small>(29 / 293)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-parse/parse/lib/browser/</a> &#187; ParseQuery.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075
+1076
+1077
+1078
+1079
+1080
+1081
+1082
+1083
+1084
+1085
+1086
+1087
+1088
+1089
+1090
+1091
+1092
+1093
+1094
+1095
+1096
+1097
+1098
+1099
+1100
+1101
+1102
+1103
+1104
+1105
+1106
+1107
+1108
+1109
+1110
+1111
+1112
+1113
+1114
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123
+1124
+1125
+1126
+1127
+1128
+1129
+1130
+1131
+1132
+1133
+1134
+1135
+1136
+1137
+1138
+1139
+1140
+1141
+1142
+1143
+1144
+1145
+1146
+1147
+1148
+1149
+1150
+1151
+1152
+1153
+1154
+1155
+1156
+1157
+1158
+1159
+1160
+1161
+1162
+1163
+1164
+1165
+1166
+1167
+1168
+1169
+1170
+1171
+1172
+1173
+1174
+1175
+1176
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187
+1188
+1189
+1190
+1191
+1192
+1193
+1194
+1195
+1196
+1197
+1198
+1199
+1200
+1201
+1202
+1203
+1204
+1205
+1206
+1207
+1208
+1209
+1210
+1211
+1212
+1213
+1214
+1215
+1216
+1217
+1218
+1219</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+&nbsp;
+var _typeof2 = require('babel-runtime/helpers/typeof');
+&nbsp;
+var _typeof3 = _interopRequireDefault(_typeof2);
+&nbsp;
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+&nbsp;
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+&nbsp;
+var _createClass2 = require('babel-runtime/helpers/createClass');
+&nbsp;
+var _createClass3 = _interopRequireDefault(_createClass2);
+&nbsp;
+var _CoreManager = require('./CoreManager');
+&nbsp;
+var _CoreManager2 = _interopRequireDefault(_CoreManager);
+&nbsp;
+var _encode = require('./encode');
+&nbsp;
+var _encode2 = _interopRequireDefault(_encode);
+&nbsp;
+var _ParseError = require('./ParseError');
+&nbsp;
+var _ParseError2 = _interopRequireDefault(_ParseError);
+&nbsp;
+var _ParseGeoPoint = require('./ParseGeoPoint');
+&nbsp;
+var _ParseGeoPoint2 = _interopRequireDefault(_ParseGeoPoint);
+&nbsp;
+var _ParseObject = require('./ParseObject');
+&nbsp;
+var _ParseObject2 = _interopRequireDefault(_ParseObject);
+&nbsp;
+var _ParsePromise = require('./ParsePromise');
+&nbsp;
+var _ParsePromise2 = _interopRequireDefault(_ParsePromise);
+&nbsp;
+function _interopRequireDefault(obj) {
+  return obj &amp;&amp; obj.__esModule ? obj : { default: obj };
+}
+&nbsp;
+/**
+ * Converts a string into a regex that matches it.
+ * Surrounding with \Q .. \E does this, we just need to escape any \E's in
+ * the text separately.
+ */
+/**
+ * Copyright (c) 2015-present, Parse, LLC.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * 
+ */
+&nbsp;
+<span class="fstat-no" title="function not covered" >function quote(s) {</span>
+<span class="cstat-no" title="statement not covered" >  return '\\Q' + s.replace('\\E', '\\E\\\\E\\Q') + '\\E';</span>
+}
+&nbsp;
+/**
+ * Creates a new parse Parse.Query for the given Parse.Object subclass.
+ * @class Parse.Query
+ * @constructor
+ * @param {} objectClass An instance of a subclass of Parse.Object, or a Parse className string.
+ *
+ * &lt;p&gt;Parse.Query defines a query that is used to fetch Parse.Objects. The
+ * most common use case is finding all objects that match a query through the
+ * &lt;code&gt;find&lt;/code&gt; method. For example, this sample code fetches all objects
+ * of class &lt;code&gt;MyClass&lt;/code&gt;. It calls a different function depending on
+ * whether the fetch succeeded or not.
+ *
+ * &lt;pre&gt;
+ * var query = new Parse.Query(MyClass);
+ * query.find({
+ *   success: function(results) {
+ *     // results is an array of Parse.Object.
+ *   },
+ *
+ *   error: function(error) {
+ *     // error is an instance of Parse.Error.
+ *   }
+ * });&lt;/pre&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;A Parse.Query can also be used to retrieve a single object whose id is
+ * known, through the get method. For example, this sample code fetches an
+ * object of class &lt;code&gt;MyClass&lt;/code&gt; and id &lt;code&gt;myId&lt;/code&gt;. It calls a
+ * different function depending on whether the fetch succeeded or not.
+ *
+ * &lt;pre&gt;
+ * var query = new Parse.Query(MyClass);
+ * query.get(myId, {
+ *   success: function(object) {
+ *     // object is an instance of Parse.Object.
+ *   },
+ *
+ *   error: function(object, error) {
+ *     // error is an instance of Parse.Error.
+ *   }
+ * });&lt;/pre&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;A Parse.Query can also be used to count the number of objects that match
+ * the query without retrieving all of those objects. For example, this
+ * sample code counts the number of objects of the class &lt;code&gt;MyClass&lt;/code&gt;
+ * &lt;pre&gt;
+ * var query = new Parse.Query(MyClass);
+ * query.count({
+ *   success: function(number) {
+ *     // There are number instances of MyClass.
+ *   },
+ *
+ *   error: function(error) {
+ *     // error is an instance of Parse.Error.
+ *   }
+ * });&lt;/pre&gt;&lt;/p&gt;
+ */
+&nbsp;
+var ParseQuery = function () {
+<span class="fstat-no" title="function not covered" >  function ParseQuery(objectClass) {</span>
+<span class="cstat-no" title="statement not covered" >    (0, _classCallCheck3.default)(this, ParseQuery);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof objectClass === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >      if (objectClass === 'User' &amp;&amp; _CoreManager2.default.get('PERFORM_USER_REWRITE')) {</span>
+<span class="cstat-no" title="statement not covered" >        this.className = '_User';</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        this.className = objectClass;</span>
+      }
+    } else <span class="cstat-no" title="statement not covered" >if (objectClass instanceof _ParseObject2.default) {</span>
+<span class="cstat-no" title="statement not covered" >      this.className = objectClass.className;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof objectClass === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof objectClass.className === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        this.className = objectClass.className;</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        var obj = new objectClass();</span>
+<span class="cstat-no" title="statement not covered" >        this.className = obj.className;</span>
+      }
+    } else {
+<span class="cstat-no" title="statement not covered" >      throw new TypeError('A ParseQuery must be constructed with a ParseObject or class name.');</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._where = {};</span>
+<span class="cstat-no" title="statement not covered" >    this._include = [];</span>
+<span class="cstat-no" title="statement not covered" >    this._limit = -1; </span>// negative limit is not sent in the server request
+<span class="cstat-no" title="statement not covered" >    this._skip = 0;</span>
+<span class="cstat-no" title="statement not covered" >    this._extraOptions = {};</span>
+  }
+&nbsp;
+  /**
+   * Adds constraint that at least one of the passed in queries matches.
+   * @method _orQuery
+   * @param {Array} queries
+   * @return {Parse.Query} Returns the query, so you can chain this call.
+   */
+&nbsp;
+  (0, _createClass3.default)(ParseQuery, [{
+    key: '_orQuery',
+    value: <span class="fstat-no" title="function not covered" >function (queries) {</span>
+<span class="cstat-no" title="statement not covered" >      var queryJSON = queries.map(<span class="fstat-no" title="function not covered" >function (q) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return q.toJSON().where;</span>
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._where.$or = queryJSON;</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Helper for condition queries
+     */
+&nbsp;
+  }, {
+    key: '_addCondition',
+    value: <span class="fstat-no" title="function not covered" >function (key, condition, value) {</span>
+<span class="cstat-no" title="statement not covered" >      if (!this._where[key] || typeof this._where[key] === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        this._where[key] = {};</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._where[key][condition] = (0, _encode2.default)(value, false, true);</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Returns a JSON representation of this query.
+     * @method toJSON
+     * @return {Object} The JSON representation of the query.
+     */
+&nbsp;
+  }, {
+    key: 'toJSON',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var params = {</span>
+        where: this._where
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (this._include.length) {</span>
+<span class="cstat-no" title="statement not covered" >        params.include = this._include.join(',');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (this._select) {</span>
+<span class="cstat-no" title="statement not covered" >        params.keys = this._select.join(',');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (this._limit &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >        params.limit = this._limit;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (this._skip &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        params.skip = this._skip;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (this._order) {</span>
+<span class="cstat-no" title="statement not covered" >        params.order = this._order.join(',');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      for (var key in this._extraOptions) {</span>
+<span class="cstat-no" title="statement not covered" >        params[key] = this._extraOptions[key];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return params;</span>
+    }
+&nbsp;
+    /**
+     * Constructs a Parse.Object whose id is already known by fetching data from
+     * the server.  Either options.success or options.error is called when the
+     * find completes.
+     *
+     * @method get
+     * @param {String} objectId The id of the object to be fetched.
+     * @param {Object} options A Backbone-style options object.
+     * Valid options are:&lt;ul&gt;
+     *   &lt;li&gt;success: A Backbone-style success callback
+     *   &lt;li&gt;error: An Backbone-style error callback.
+     *   &lt;li&gt;useMasterKey: In Cloud Code and Node only, causes the Master Key to
+     *     be used for this request.
+     *   &lt;li&gt;sessionToken: A valid session token, used for making a request on
+     *       behalf of a specific user.
+     * &lt;/ul&gt;
+     *
+     * @return {Parse.Promise} A promise that is resolved with the result when
+     * the query completes.
+     */
+&nbsp;
+  }, {
+    key: 'get',
+    value: <span class="fstat-no" title="function not covered" >function (objectId, options) {</span>
+<span class="cstat-no" title="statement not covered" >      this.equalTo('objectId', objectId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var firstOptions = {};</span>
+<span class="cstat-no" title="statement not covered" >      if (options &amp;&amp; options.hasOwnProperty('useMasterKey')) {</span>
+<span class="cstat-no" title="statement not covered" >        firstOptions.useMasterKey = options.useMasterKey;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (options &amp;&amp; options.hasOwnProperty('sessionToken')) {</span>
+<span class="cstat-no" title="statement not covered" >        firstOptions.sessionToken = options.sessionToken;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return this.first(firstOptions).then(<span class="fstat-no" title="function not covered" >function (response) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (response) {</span>
+<span class="cstat-no" title="statement not covered" >          return response;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var errorObject = new _ParseError2.default(_ParseError2.default.OBJECT_NOT_FOUND, 'Object not found.');</span>
+<span class="cstat-no" title="statement not covered" >        return _ParsePromise2.default.error(errorObject);</span>
+      })._thenRunCallbacks(options, null);
+    }
+&nbsp;
+    /**
+     * Retrieves a list of ParseObjects that satisfy this query.
+     * Either options.success or options.error is called when the find
+     * completes.
+     *
+     * @method find
+     * @param {Object} options A Backbone-style options object. Valid options
+     * are:&lt;ul&gt;
+     *   &lt;li&gt;success: Function to call when the find completes successfully.
+     *   &lt;li&gt;error: Function to call when the find fails.
+     *   &lt;li&gt;useMasterKey: In Cloud Code and Node only, causes the Master Key to
+     *     be used for this request.
+     *   &lt;li&gt;sessionToken: A valid session token, used for making a request on
+     *       behalf of a specific user.
+     * &lt;/ul&gt;
+     *
+     * @return {Parse.Promise} A promise that is resolved with the results when
+     * the query completes.
+     */
+&nbsp;
+  }, {
+    key: 'find',
+    value: <span class="fstat-no" title="function not covered" >function (options) {</span>
+<span class="cstat-no" title="statement not covered" >      var _this = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var findOptions = {};</span>
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('useMasterKey')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.useMasterKey = options.useMasterKey;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('sessionToken')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.sessionToken = options.sessionToken;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var controller = _CoreManager2.default.getQueryController();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return controller.find(this.className, this.toJSON(), findOptions).then(<span class="fstat-no" title="function not covered" >function (response) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return response.results.map(<span class="fstat-no" title="function not covered" >function (data) {</span></span>
+          // In cases of relations, the server may send back a className
+          // on the top level of the payload
+<span class="cstat-no" title="statement not covered" >          var override = response.className || _this.className;</span>
+<span class="cstat-no" title="statement not covered" >          if (!data.className) {</span>
+<span class="cstat-no" title="statement not covered" >            data.className = override;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          return _ParseObject2.default.fromJSON(data, true);</span>
+        });
+      })._thenRunCallbacks(options);
+    }
+&nbsp;
+    /**
+     * Counts the number of objects that match this query.
+     * Either options.success or options.error is called when the count
+     * completes.
+     *
+     * @method count
+     * @param {Object} options A Backbone-style options object. Valid options
+     * are:&lt;ul&gt;
+     *   &lt;li&gt;success: Function to call when the count completes successfully.
+     *   &lt;li&gt;error: Function to call when the find fails.
+     *   &lt;li&gt;useMasterKey: In Cloud Code and Node only, causes the Master Key to
+     *     be used for this request.
+     *   &lt;li&gt;sessionToken: A valid session token, used for making a request on
+     *       behalf of a specific user.
+     * &lt;/ul&gt;
+     *
+     * @return {Parse.Promise} A promise that is resolved with the count when
+     * the query completes.
+     */
+&nbsp;
+  }, {
+    key: 'count',
+    value: <span class="fstat-no" title="function not covered" >function (options) {</span>
+<span class="cstat-no" title="statement not covered" >      options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var findOptions = {};</span>
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('useMasterKey')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.useMasterKey = options.useMasterKey;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('sessionToken')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.sessionToken = options.sessionToken;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var controller = _CoreManager2.default.getQueryController();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var params = this.toJSON();</span>
+<span class="cstat-no" title="statement not covered" >      params.limit = 0;</span>
+<span class="cstat-no" title="statement not covered" >      params.count = 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return controller.find(this.className, params, findOptions).then(<span class="fstat-no" title="function not covered" >function (result) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return result.count;</span>
+      })._thenRunCallbacks(options);
+    }
+&nbsp;
+    /**
+     * Retrieves at most one Parse.Object that satisfies this query.
+     *
+     * Either options.success or options.error is called when it completes.
+     * success is passed the object if there is one. otherwise, undefined.
+     *
+     * @method first
+     * @param {Object} options A Backbone-style options object. Valid options
+     * are:&lt;ul&gt;
+     *   &lt;li&gt;success: Function to call when the find completes successfully.
+     *   &lt;li&gt;error: Function to call when the find fails.
+     *   &lt;li&gt;useMasterKey: In Cloud Code and Node only, causes the Master Key to
+     *     be used for this request.
+     *   &lt;li&gt;sessionToken: A valid session token, used for making a request on
+     *       behalf of a specific user.
+     * &lt;/ul&gt;
+     *
+     * @return {Parse.Promise} A promise that is resolved with the object when
+     * the query completes.
+     */
+&nbsp;
+  }, {
+    key: 'first',
+    value: <span class="fstat-no" title="function not covered" >function (options) {</span>
+<span class="cstat-no" title="statement not covered" >      var _this2 = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var findOptions = {};</span>
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('useMasterKey')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.useMasterKey = options.useMasterKey;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('sessionToken')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.sessionToken = options.sessionToken;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var controller = _CoreManager2.default.getQueryController();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var params = this.toJSON();</span>
+<span class="cstat-no" title="statement not covered" >      params.limit = 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return controller.find(this.className, params, findOptions).then(<span class="fstat-no" title="function not covered" >function (response) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var objects = response.results;</span>
+<span class="cstat-no" title="statement not covered" >        if (!objects[0]) {</span>
+<span class="cstat-no" title="statement not covered" >          return undefined;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (!objects[0].className) {</span>
+<span class="cstat-no" title="statement not covered" >          objects[0].className = _this2.className;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return _ParseObject2.default.fromJSON(objects[0], true);</span>
+      })._thenRunCallbacks(options);
+    }
+&nbsp;
+    /**
+     * Iterates over each result of a query, calling a callback for each one. If
+     * the callback returns a promise, the iteration will not continue until
+     * that promise has been fulfilled. If the callback returns a rejected
+     * promise, then iteration will stop with that error. The items are
+     * processed in an unspecified order. The query may not have any sort order,
+     * and may not use limit or skip.
+     * @method each
+     * @param {Function} callback Callback that will be called with each result
+     *     of the query.
+     * @param {Object} options A Backbone-style options object. Valid options
+     * are:&lt;ul&gt;
+     *   &lt;li&gt;success: Function to call when the iteration completes successfully.
+     *   &lt;li&gt;error: Function to call when the iteration fails.
+     *   &lt;li&gt;useMasterKey: In Cloud Code and Node only, causes the Master Key to
+     *     be used for this request.
+     *   &lt;li&gt;sessionToken: A valid session token, used for making a request on
+     *       behalf of a specific user.
+     * &lt;/ul&gt;
+     * @return {Parse.Promise} A promise that will be fulfilled once the
+     *     iteration has completed.
+     */
+&nbsp;
+  }, {
+    key: 'each',
+    value: <span class="fstat-no" title="function not covered" >function (callback, options) {</span>
+<span class="cstat-no" title="statement not covered" >      options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (this._order || this._skip || this._limit &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >        return _ParsePromise2.default.error('Cannot iterate on a query with sort, skip, or limit.')._thenRunCallbacks(options);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      new _ParsePromise2.default();</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var query = new ParseQuery(this.className);</span>
+      // We can override the batch size from the options.
+      // This is undocumented, but useful for testing.
+<span class="cstat-no" title="statement not covered" >      query._limit = options.batchSize || 100;</span>
+<span class="cstat-no" title="statement not covered" >      query._include = this._include.map(<span class="fstat-no" title="function not covered" >function (i) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return i;</span>
+      });
+<span class="cstat-no" title="statement not covered" >      if (this._select) {</span>
+<span class="cstat-no" title="statement not covered" >        query._select = this._select.map(<span class="fstat-no" title="function not covered" >function (s) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return s;</span>
+        });
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      query._where = {};</span>
+<span class="cstat-no" title="statement not covered" >      for (var attr in this._where) {</span>
+<span class="cstat-no" title="statement not covered" >        var val = this._where[attr];</span>
+<span class="cstat-no" title="statement not covered" >        if (Array.isArray(val)) {</span>
+<span class="cstat-no" title="statement not covered" >          query._where[attr] = val.map(<span class="fstat-no" title="function not covered" >function (v) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return v;</span>
+          });
+        } else <span class="cstat-no" title="statement not covered" >if (val &amp;&amp; (typeof val === 'undefined' ? 'undefined' : (0, _typeof3.default)(val)) === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >          var conditionMap = {};</span>
+<span class="cstat-no" title="statement not covered" >          query._where[attr] = conditionMap;</span>
+<span class="cstat-no" title="statement not covered" >          for (var cond in val) {</span>
+<span class="cstat-no" title="statement not covered" >            conditionMap[cond] = val[cond];</span>
+          }
+        } else {
+<span class="cstat-no" title="statement not covered" >          query._where[attr] = val;</span>
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      query.ascending('objectId');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var findOptions = {};</span>
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('useMasterKey')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.useMasterKey = options.useMasterKey;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (options.hasOwnProperty('sessionToken')) {</span>
+<span class="cstat-no" title="statement not covered" >        findOptions.sessionToken = options.sessionToken;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var finished = false;</span>
+<span class="cstat-no" title="statement not covered" >      return _ParsePromise2.default._continueWhile(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        return !finished;</span>
+      }, <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return query.find(findOptions).then(<span class="fstat-no" title="function not covered" >function (results) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var callbacksDone = _ParsePromise2.default.as();</span>
+<span class="cstat-no" title="statement not covered" >          results.forEach(<span class="fstat-no" title="function not covered" >function (result) {</span></span>
+<span class="cstat-no" title="statement not covered" >            callbacksDone = callbacksDone.then(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >              return callback(result);</span>
+            });
+          });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          return callbacksDone.then(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (results.length &gt;= query._limit) {</span>
+<span class="cstat-no" title="statement not covered" >              query.greaterThan('objectId', results[results.length - 1].id);</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              finished = true;</span>
+            }
+          });
+        });
+      })._thenRunCallbacks(options);
+    }
+&nbsp;
+    /** Query Conditions **/
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * be equal to the provided value.
+     * @method equalTo
+     * @param {String} key The key to check.
+     * @param value The value that the Parse.Object must contain.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'equalTo',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof value === 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >        return this.doesNotExist(key);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._where[key] = (0, _encode2.default)(value, false, true);</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * be not equal to the provided value.
+     * @method notEqualTo
+     * @param {String} key The key to check.
+     * @param value The value that must not be equalled.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'notEqualTo',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$ne', value);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * be less than the provided value.
+     * @method lessThan
+     * @param {String} key The key to check.
+     * @param value The value that provides an upper bound.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'lessThan',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$lt', value);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * be greater than the provided value.
+     * @method greaterThan
+     * @param {String} key The key to check.
+     * @param value The value that provides an lower bound.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'greaterThan',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$gt', value);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * be less than or equal to the provided value.
+     * @method lessThanOrEqualTo
+     * @param {String} key The key to check.
+     * @param value The value that provides an upper bound.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'lessThanOrEqualTo',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$lte', value);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * be greater than or equal to the provided value.
+     * @method greaterThanOrEqualTo
+     * @param {String} key The key to check.
+     * @param value The value that provides an lower bound.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'greaterThanOrEqualTo',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$gte', value);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * be contained in the provided list of values.
+     * @method containedIn
+     * @param {String} key The key to check.
+     * @param {Array} values The values that will match.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'containedIn',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$in', value);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * not be contained in the provided list of values.
+     * @method notContainedIn
+     * @param {String} key The key to check.
+     * @param {Array} values The values that will not match.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'notContainedIn',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$nin', value);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's value to
+     * contain each one of the provided list of values.
+     * @method containsAll
+     * @param {String} key The key to check.  This key's value must be an array.
+     * @param {Array} values The values that will match.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'containsAll',
+    value: <span class="fstat-no" title="function not covered" >function (key, values) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$all', values);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint for finding objects that contain the given key.
+     * @method exists
+     * @param {String} key The key that should exist.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'exists',
+    value: <span class="fstat-no" title="function not covered" >function (key) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$exists', true);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint for finding objects that do not contain a given key.
+     * @method doesNotExist
+     * @param {String} key The key that should not exist
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'doesNotExist',
+    value: <span class="fstat-no" title="function not covered" >function (key) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$exists', false);</span>
+    }
+&nbsp;
+    /**
+     * Adds a regular expression constraint for finding string values that match
+     * the provided regular expression.
+     * This may be slow for large datasets.
+     * @method matches
+     * @param {String} key The key that the string to match is stored in.
+     * @param {RegExp} regex The regular expression pattern to match.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'matches',
+    value: <span class="fstat-no" title="function not covered" >function (key, regex, modifiers) {</span>
+<span class="cstat-no" title="statement not covered" >      this._addCondition(key, '$regex', regex);</span>
+<span class="cstat-no" title="statement not covered" >      if (!modifiers) {</span>
+<span class="cstat-no" title="statement not covered" >        modifiers = '';</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (regex.ignoreCase) {</span>
+<span class="cstat-no" title="statement not covered" >        modifiers += 'i';</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (regex.multiline) {</span>
+<span class="cstat-no" title="statement not covered" >        modifiers += 'm';</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (modifiers.length) {</span>
+<span class="cstat-no" title="statement not covered" >        this._addCondition(key, '$options', modifiers);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint that requires that a key's value matches a Parse.Query
+     * constraint.
+     * @method matchesQuery
+     * @param {String} key The key that the contains the object to match the
+     *                     query.
+     * @param {Parse.Query} query The query that should match.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'matchesQuery',
+    value: <span class="fstat-no" title="function not covered" >function (key, query) {</span>
+<span class="cstat-no" title="statement not covered" >      var queryJSON = query.toJSON();</span>
+<span class="cstat-no" title="statement not covered" >      queryJSON.className = query.className;</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$inQuery', queryJSON);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint that requires that a key's value not matches a
+     * Parse.Query constraint.
+     * @method doesNotMatchQuery
+     * @param {String} key The key that the contains the object to match the
+     *                     query.
+     * @param {Parse.Query} query The query that should not match.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'doesNotMatchQuery',
+    value: <span class="fstat-no" title="function not covered" >function (key, query) {</span>
+<span class="cstat-no" title="statement not covered" >      var queryJSON = query.toJSON();</span>
+<span class="cstat-no" title="statement not covered" >      queryJSON.className = query.className;</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$notInQuery', queryJSON);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint that requires that a key's value matches a value in
+     * an object returned by a different Parse.Query.
+     * @method matchesKeyInQuery
+     * @param {String} key The key that contains the value that is being
+     *                     matched.
+     * @param {String} queryKey The key in the objects returned by the query to
+     *                          match against.
+     * @param {Parse.Query} query The query to run.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'matchesKeyInQuery',
+    value: <span class="fstat-no" title="function not covered" >function (key, queryKey, query) {</span>
+<span class="cstat-no" title="statement not covered" >      var queryJSON = query.toJSON();</span>
+<span class="cstat-no" title="statement not covered" >      queryJSON.className = query.className;</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$select', {</span>
+        key: queryKey,
+        query: queryJSON
+      });
+    }
+&nbsp;
+    /**
+     * Adds a constraint that requires that a key's value not match a value in
+     * an object returned by a different Parse.Query.
+     * @method doesNotMatchKeyInQuery
+     * @param {String} key The key that contains the value that is being
+     *                     excluded.
+     * @param {String} queryKey The key in the objects returned by the query to
+     *                          match against.
+     * @param {Parse.Query} query The query to run.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'doesNotMatchKeyInQuery',
+    value: <span class="fstat-no" title="function not covered" >function (key, queryKey, query) {</span>
+<span class="cstat-no" title="statement not covered" >      var queryJSON = query.toJSON();</span>
+<span class="cstat-no" title="statement not covered" >      queryJSON.className = query.className;</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$dontSelect', {</span>
+        key: queryKey,
+        query: queryJSON
+      });
+    }
+&nbsp;
+    /**
+     * Adds a constraint for finding string values that contain a provided
+     * string.  This may be slow for large datasets.
+     * @method contains
+     * @param {String} key The key that the string to match is stored in.
+     * @param {String} substring The substring that the value must contain.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'contains',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof value !== 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('The value being searched for must be a string.');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$regex', quote(value));</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint for finding string values that start with a provided
+     * string.  This query will use the backend index, so it will be fast even
+     * for large datasets.
+     * @method startsWith
+     * @param {String} key The key that the string to match is stored in.
+     * @param {String} prefix The substring that the value must start with.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'startsWith',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof value !== 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('The value being searched for must be a string.');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$regex', '^' + quote(value));</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint for finding string values that end with a provided
+     * string.  This will be slow for large datasets.
+     * @method endsWith
+     * @param {String} key The key that the string to match is stored in.
+     * @param {String} suffix The substring that the value must end with.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'endsWith',
+    value: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof value !== 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('The value being searched for must be a string.');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$regex', quote(value) + '$');</span>
+    }
+&nbsp;
+    /**
+     * Adds a proximity based constraint for finding objects with key point
+     * values near the point given.
+     * @method near
+     * @param {String} key The key that the Parse.GeoPoint is stored in.
+     * @param {Parse.GeoPoint} point The reference Parse.GeoPoint that is used.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'near',
+    value: <span class="fstat-no" title="function not covered" >function (key, point) {</span>
+<span class="cstat-no" title="statement not covered" >      if (!(point instanceof _ParseGeoPoint2.default)) {</span>
+        // Try to cast it as a GeoPoint
+<span class="cstat-no" title="statement not covered" >        point = new _ParseGeoPoint2.default(point);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$nearSphere', point);</span>
+    }
+&nbsp;
+    /**
+     * Adds a proximity based constraint for finding objects with key point
+     * values near the point given and within the maximum distance given.
+     * @method withinRadians
+     * @param {String} key The key that the Parse.GeoPoint is stored in.
+     * @param {Parse.GeoPoint} point The reference Parse.GeoPoint that is used.
+     * @param {Number} maxDistance Maximum distance (in radians) of results to
+     *   return.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'withinRadians',
+    value: <span class="fstat-no" title="function not covered" >function (key, point, distance) {</span>
+<span class="cstat-no" title="statement not covered" >      this.near(key, point);</span>
+<span class="cstat-no" title="statement not covered" >      return this._addCondition(key, '$maxDistance', distance);</span>
+    }
+&nbsp;
+    /**
+     * Adds a proximity based constraint for finding objects with key point
+     * values near the point given and within the maximum distance given.
+     * Radius of earth used is 3958.8 miles.
+     * @method withinMiles
+     * @param {String} key The key that the Parse.GeoPoint is stored in.
+     * @param {Parse.GeoPoint} point The reference Parse.GeoPoint that is used.
+     * @param {Number} maxDistance Maximum distance (in miles) of results to
+     *     return.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'withinMiles',
+    value: <span class="fstat-no" title="function not covered" >function (key, point, distance) {</span>
+<span class="cstat-no" title="statement not covered" >      return this.withinRadians(key, point, distance / 3958.8);</span>
+    }
+&nbsp;
+    /**
+     * Adds a proximity based constraint for finding objects with key point
+     * values near the point given and within the maximum distance given.
+     * Radius of earth used is 6371.0 kilometers.
+     * @method withinKilometers
+     * @param {String} key The key that the Parse.GeoPoint is stored in.
+     * @param {Parse.GeoPoint} point The reference Parse.GeoPoint that is used.
+     * @param {Number} maxDistance Maximum distance (in kilometers) of results
+     *     to return.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'withinKilometers',
+    value: <span class="fstat-no" title="function not covered" >function (key, point, distance) {</span>
+<span class="cstat-no" title="statement not covered" >      return this.withinRadians(key, point, distance / 6371.0);</span>
+    }
+&nbsp;
+    /**
+     * Adds a constraint to the query that requires a particular key's
+     * coordinates be contained within a given rectangular geographic bounding
+     * box.
+     * @method withinGeoBox
+     * @param {String} key The key to be constrained.
+     * @param {Parse.GeoPoint} southwest
+     *     The lower-left inclusive corner of the box.
+     * @param {Parse.GeoPoint} northeast
+     *     The upper-right inclusive corner of the box.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'withinGeoBox',
+    value: <span class="fstat-no" title="function not covered" >function (key, southwest, northeast) {</span>
+<span class="cstat-no" title="statement not covered" >      if (!(southwest instanceof _ParseGeoPoint2.default)) {</span>
+<span class="cstat-no" title="statement not covered" >        southwest = new _ParseGeoPoint2.default(southwest);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (!(northeast instanceof _ParseGeoPoint2.default)) {</span>
+<span class="cstat-no" title="statement not covered" >        northeast = new _ParseGeoPoint2.default(northeast);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._addCondition(key, '$within', { '$box': [southwest, northeast] });</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /** Query Orderings **/
+&nbsp;
+    /**
+     * Sorts the results in ascending order by the given key.
+     *
+     * @method ascending
+     * @param {(String|String[]|...String} key The key to order by, which is a
+     * string of comma separated values, or an Array of keys, or multiple keys.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'ascending',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      this._order = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      for (var _len = arguments.length, keys = Array(_len), _key = 0; _key &lt; _len; _key++) {</span>
+<span class="cstat-no" title="statement not covered" >        keys[_key] = arguments[_key];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return this.addAscending.apply(this, keys);</span>
+    }
+&nbsp;
+    /**
+     * Sorts the results in ascending order by the given key,
+     * but can also add secondary sort descriptors without overwriting _order.
+     *
+     * @method addAscending
+     * @param {(String|String[]|...String} key The key to order by, which is a
+     * string of comma separated values, or an Array of keys, or multiple keys.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'addAscending',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var _this3 = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!this._order) {</span>
+<span class="cstat-no" title="statement not covered" >        this._order = [];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      for (var _len2 = arguments.length, keys = Array(_len2), _key2 = 0; _key2 &lt; _len2; _key2++) {</span>
+<span class="cstat-no" title="statement not covered" >        keys[_key2] = arguments[_key2];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      keys.forEach(<span class="fstat-no" title="function not covered" >function (key) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (Array.isArray(key)) {</span>
+<span class="cstat-no" title="statement not covered" >          key = key.join();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        _this3._order = _this3._order.concat(key.replace(/\s/g, '').split(','));</span>
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Sorts the results in descending order by the given key.
+     *
+     * @method descending
+     * @param {(String|String[]|...String} key The key to order by, which is a
+     * string of comma separated values, or an Array of keys, or multiple keys.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'descending',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      this._order = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      for (var _len3 = arguments.length, keys = Array(_len3), _key3 = 0; _key3 &lt; _len3; _key3++) {</span>
+<span class="cstat-no" title="statement not covered" >        keys[_key3] = arguments[_key3];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return this.addDescending.apply(this, keys);</span>
+    }
+&nbsp;
+    /**
+     * Sorts the results in descending order by the given key,
+     * but can also add secondary sort descriptors without overwriting _order.
+     *
+     * @method addDescending
+     * @param {(String|String[]|...String} key The key to order by, which is a
+     * string of comma separated values, or an Array of keys, or multiple keys.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'addDescending',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var _this4 = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!this._order) {</span>
+<span class="cstat-no" title="statement not covered" >        this._order = [];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      for (var _len4 = arguments.length, keys = Array(_len4), _key4 = 0; _key4 &lt; _len4; _key4++) {</span>
+<span class="cstat-no" title="statement not covered" >        keys[_key4] = arguments[_key4];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      keys.forEach(<span class="fstat-no" title="function not covered" >function (key) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (Array.isArray(key)) {</span>
+<span class="cstat-no" title="statement not covered" >          key = key.join();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        _this4._order = _this4._order.concat(key.replace(/\s/g, '').split(',').map(<span class="fstat-no" title="function not covered" >function (k) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return '-' + k;</span>
+        }));
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /** Query Options **/
+&nbsp;
+    /**
+     * Sets the number of results to skip before returning any results.
+     * This is useful for pagination.
+     * Default is to skip zero results.
+     * @method skip
+     * @param {Number} n the number of results to skip.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'skip',
+    value: <span class="fstat-no" title="function not covered" >function (n) {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof n !== 'number' || n &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('You can only skip by a positive number');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._skip = n;</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Sets the limit of the number of results to return. The default limit is
+     * 100, with a maximum of 1000 results being returned at a time.
+     * @method limit
+     * @param {Number} n the number of results to limit to.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'limit',
+    value: <span class="fstat-no" title="function not covered" >function (n) {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof n !== 'number') {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('You can only set the limit to a numeric value');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._limit = n;</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Includes nested Parse.Objects for the provided key.  You can use dot
+     * notation to specify which fields in the included object are also fetched.
+     * @method include
+     * @param {String} key The name of the key to include.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'include',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var _this5 = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      for (var _len5 = arguments.length, keys = Array(_len5), _key5 = 0; _key5 &lt; _len5; _key5++) {</span>
+<span class="cstat-no" title="statement not covered" >        keys[_key5] = arguments[_key5];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      keys.forEach(<span class="fstat-no" title="function not covered" >function (key) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (Array.isArray(key)) {</span>
+<span class="cstat-no" title="statement not covered" >          _this5._include = _this5._include.concat(key);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          _this5._include.push(key);</span>
+        }
+      });
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Restricts the fields of the returned Parse.Objects to include only the
+     * provided keys.  If this is called multiple times, then all of the keys
+     * specified in each of the calls will be included.
+     * @method select
+     * @param {Array} keys The names of the keys to include.
+     * @return {Parse.Query} Returns the query, so you can chain this call.
+     */
+&nbsp;
+  }, {
+    key: 'select',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var _this6 = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!this._select) {</span>
+<span class="cstat-no" title="statement not covered" >        this._select = [];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      for (var _len6 = arguments.length, keys = Array(_len6), _key6 = 0; _key6 &lt; _len6; _key6++) {</span>
+<span class="cstat-no" title="statement not covered" >        keys[_key6] = arguments[_key6];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      keys.forEach(<span class="fstat-no" title="function not covered" >function (key) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (Array.isArray(key)) {</span>
+<span class="cstat-no" title="statement not covered" >          _this6._select = _this6._select.concat(key);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          _this6._select.push(key);</span>
+        }
+      });
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    }
+&nbsp;
+    /**
+     * Subscribe this query to get liveQuery updates
+     * @method subscribe
+     * @return {LiveQuerySubscription} Returns the liveQuerySubscription, it's an event emitter
+     * which can be used to get liveQuery updates.
+     */
+&nbsp;
+  }, {
+    key: 'subscribe',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var controller = _CoreManager2.default.getLiveQueryController();</span>
+<span class="cstat-no" title="statement not covered" >      return controller.subscribe(this);</span>
+    }
+&nbsp;
+    /**
+     * Constructs a Parse.Query that is the OR of the passed in queries.  For
+     * example:
+     * &lt;pre&gt;var compoundQuery = Parse.Query.or(query1, query2, query3);&lt;/pre&gt;
+     *
+     * will create a compoundQuery that is an or of the query1, query2, and
+     * query3.
+     * @method or
+     * @param {...Parse.Query} var_args The list of queries to OR.
+     * @static
+     * @return {Parse.Query} The query that is the OR of the passed in queries.
+     */
+&nbsp;
+  }], [{
+    key: 'or',
+    value: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      var className = null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      for (var _len7 = arguments.length, queries = Array(_len7), _key7 = 0; _key7 &lt; _len7; _key7++) {</span>
+<span class="cstat-no" title="statement not covered" >        queries[_key7] = arguments[_key7];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      queries.forEach(<span class="fstat-no" title="function not covered" >function (q) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!className) {</span>
+<span class="cstat-no" title="statement not covered" >          className = q.className;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (className !== q.className) {</span>
+<span class="cstat-no" title="statement not covered" >          throw new Error('All queries must be for the same class.');</span>
+        }
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var query = new ParseQuery(className);</span>
+<span class="cstat-no" title="statement not covered" >      query._orQuery(queries);</span>
+<span class="cstat-no" title="statement not covered" >      return query;</span>
+    }
+  }]);
+  return ParseQuery;
+}();
+&nbsp;
+exports.default = ParseQuery;
+&nbsp;
+var DefaultController = {
+  find: <span class="fstat-no" title="function not covered" >function (className, params, options) {</span>
+<span class="cstat-no" title="statement not covered" >    var RESTController = _CoreManager2.default.getRESTController();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return RESTController.request('GET', 'classes/' + className, params, options);</span>
+  }
+};
+&nbsp;
+_CoreManager2.default.setQueryController(DefaultController);
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 23:56:10 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
