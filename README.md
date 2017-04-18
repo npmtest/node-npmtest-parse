@@ -1,7 +1,10 @@
-# test coverage for  [parse (v1.9.2)](https://www.parse.com)  [![npm package](https://img.shields.io/npm/v/npmtest-parse.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-parse) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-parse.svg)](https://travis-ci.org/npmtest/node-npmtest-parse)
+# npmtest-parse
+
+#### test coverage for  [parse (v1.9.2)](https://www.parse.com)  [![npm package](https://img.shields.io/npm/v/npmtest-parse.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-parse) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-parse.svg)](https://travis-ci.org/npmtest/node-npmtest-parse)
+
 #### The Parse JavaScript SDK
 
-[![NPM](https://nodei.co/npm/parse.png?downloads=true)](https://www.npmjs.com/package/parse)
+[![NPM](https://nodei.co/npm/parse.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/parse)
 
 | git-branch : | [alpha](https://github.com/npmtest/node-npmtest-parse/tree/alpha)|
 |--:|:--|
@@ -9,11 +12,17 @@
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-parse/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-parse/build/test-report.html)|
 | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-parse/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-parse/tree/gh-pages/build)|
 
-[![istanbul-coverage](https://npmtest.github.io/node-npmtest-parse/build/screenCapture.buildCustomOrg.browser.coverage.html.png)](https://npmtest.github.io/node-npmtest-parse/build/coverage.html/index.html)
+- [https://npmtest.github.io/node-npmtest-parse/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-parse/build/coverage.html/index.html)
 
-[![test-report](https://npmtest.github.io/node-npmtest-parse/build/screenCapture.buildCustomOrg.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmtest%252Fnode-npmtest-parse%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-parse/build/test-report.html)
+[![istanbul-coverage](https://npmtest.github.io/node-npmtest-parse/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fcoverage.lib.html.png)](https://npmtest.github.io/node-npmtest-parse/build/coverage.html/index.html)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-parse/build/screenCapture.buildApidoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-parse%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-parse/build/apidoc.html)
+- [https://npmtest.github.io/node-npmtest-parse/build/test-report.html](https://npmtest.github.io/node-npmtest-parse/build/test-report.html)
+
+[![test-report](https://npmtest.github.io/node-npmtest-parse/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-parse/build/test-report.html)
+
+- [https://npmdoc.github.io/node-npmdoc-parse/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-parse/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-parse/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-parse/build/apidoc.html)
 
 ![npmPackageListing](https://npmtest.github.io/node-npmtest-parse/build/screenCapture.npmPackageListing.svg)
 
@@ -99,33 +108,26 @@
     "license": "BSD-3-Clause",
     "maintainers": [
         {
-            "name": "andrewimm",
-            "email": "andrewi@fb.com"
+            "name": "andrewimm"
         },
         {
-            "name": "grantland",
-            "email": "grantlandchew@gmail.com"
+            "name": "grantland"
         },
         {
-            "name": "lacker",
-            "email": "lacker@gmail.com"
+            "name": "lacker"
         },
         {
-            "name": "nlutsenko",
-            "email": "nlutsenko@me.com"
+            "name": "nlutsenko"
         },
         {
-            "name": "peterdotjs",
-            "email": "pdotjs@gmail.com"
+            "name": "peterdotjs"
         },
         {
-            "name": "wangmengyan95",
-            "email": "wangmengyan95@gmail.com"
+            "name": "wangmengyan95"
         }
     ],
     "name": "parse",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ParsePlatform/Parse-SDK-JS.git"
